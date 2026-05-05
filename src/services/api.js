@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://web-production-2c755.up.railway.app/api/",
+  baseURL: "https://erp-2qj3.onrender.com/api/",
 });
 
 // Attach JWT token to every request
