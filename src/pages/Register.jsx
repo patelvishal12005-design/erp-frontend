@@ -24,12 +24,15 @@ export default function Register() {
       }, 2000);
     } catch (err) {
       if (err.response && err.response.data) {
-        // Extract specific field errors if available
         const data = err.response.data;
-        const errorMsg = Object.values(data).flat().join(" ");
-        setError(errorMsg || "Registration failed. Please try again.");
+        if (typeof data === 'object' && data !== null) {
+          const errorMsg = Object.values(data).flat().join(" ");
+          setError(errorMsg || "Registration failed. Please try again.");
+        } else {
+          setError("Registration failed. Please try again. Server error.");
+        }
       } else {
-        setError("Registration failed. Please try again.");
+        setError("Registration failed. Network error or server is down.");
       }
     } finally {
       setLoading(false);

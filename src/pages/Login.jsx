@@ -17,8 +17,18 @@ export default function Login() {
       const response = await API.post("token/", { username, password });
       localStorage.setItem("token", response.data.access);
       navigate("/dashboard");
-    } catch {
-      setError("Invalid username or password. Please try again.");
+    } catch (err) {
+      if (err.response && err.response.data) {
+        const data = err.response.data;
+        if (typeof data === 'object' && data !== null) {
+          const errorMsg = Object.values(data).flat().join(" ");
+          setError(errorMsg || "Login failed. Please try again.");
+        } else {
+          setError("Login failed. Please try again. Server error.");
+        }
+      } else {
+        setError("Login failed. Network error or server is down.");
+      }
     } finally {
       setLoading(false);
     }
