@@ -66,7 +66,6 @@ export default function Sales() {
           return;
         }
         delete data.product_name;
-        delete data.unit_price;
       } else {
         delete data.product_id;
       }
@@ -151,18 +150,16 @@ export default function Sales() {
               </select>
               
               {useCustomProduct && (
-                <>
-                  <input className="modal-input" placeholder="Product Name" value={form.product_name}
-                    onChange={(e) => setForm({ ...form, product_name: e.target.value })} required />
-                  <input className="modal-input" type="number" placeholder="Unit Price (₹)" value={form.unit_price}
-                    onChange={(e) => setForm({ ...form, unit_price: e.target.value })} required />
-                </>
+                <input className="modal-input" placeholder="Product Name" value={form.product_name}
+                  onChange={(e) => setForm({ ...form, product_name: e.target.value })} required />
               )}
               
               <input className="modal-input" placeholder="Customer Name" value={form.customer}
                 onChange={(e) => setForm({ ...form, customer: e.target.value })} required />
               <input className="modal-input" type="number" placeholder="Quantity" value={form.quantity}
                 onChange={(e) => setForm({ ...form, quantity: e.target.value })} required />
+              <input className="modal-input" type="number" placeholder="Sell Price / Unit (₹)" value={form.unit_price}
+                onChange={(e) => setForm({ ...form, unit_price: e.target.value })} required />
               
               <div className="modal-actions">
                 <button type="button" className="btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
